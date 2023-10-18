@@ -19,4 +19,35 @@ model User {
   name     String
   password String
   images   String[]
+
+  transactions Transaction[]
+  card Card[]
+}
+
+model Transaction {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  sum Int
+  isTopUp Boolean?
+
+  user   User? @relation(fields: [userId], references: [id])
+  userId Int?  @map("user_id")
+  card   Card? @relation(fields: [cardId], references: [id])
+  cardId Int?  @map("card_id")
+}
+
+model Card {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  number String
+  cvv Int
+  isMain Boolean?
+
+  user   User? @relation(fields: [userId], references: [id])
+  userId Int?  @map("user_id")
+  transactions Transaction[]
 }

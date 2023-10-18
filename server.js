@@ -8,7 +8,9 @@ import path from 'path'
 import { errorHandler, notFound } from './app/middleware/error.middleware.js'
 
 import authRoutes from './app/auth/auth.routes.js'
+import cardRoutes from './app/card/card.routes.js'
 import { prisma } from './app/prisma.js'
+import transactionRoutes from './app/transaction/transaction.routes.js'
 import userRoutes from './app/user/user.routes.js'
 
 // [] - Add cors (app.use(cors()) and $ npm install cors)
@@ -29,6 +31,8 @@ async function main() {
 
 	app.use('/api/auth', authRoutes)
 	app.use('/api/users', userRoutes)
+	app.use('/api/cards', cardRoutes)
+	app.use('/api/transactions', transactionRoutes)
 
 	app.use(notFound)
 	app.use(errorHandler)
