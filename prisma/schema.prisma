@@ -32,8 +32,9 @@ model Transaction {
   sum Int
   isTopUp Boolean?
 
-  user   User? @relation(fields: [userId], references: [id])
-  userId Int?  @map("user_id")
+  sender   User? @relation(fields: [senderId], references: [id])
+  senderId Int?  @map("sender_id")
+  recipientId Int?  @map("recipient_id")
   card   Card? @relation(fields: [cardId], references: [id])
   cardId Int?  @map("card_id")
 }

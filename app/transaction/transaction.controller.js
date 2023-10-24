@@ -6,12 +6,15 @@ import { prisma } from '../prisma.js'
 // @route 	POST /api/transactions
 // @access  Private
 export const createNewTransaction = asyncHandler(async (req, res) => {
-	const { sum, isTopUp } = req.body
+	const { sum, isTopUp, sender, senderId, recipientId } = req.body
 
 	const transaction = await prisma.transaction.create({
 		data: {
 			sum,
-			isTopUp
+			isTopUp,
+			sender,
+			recipientId,
+			senderId
 		}
 	})
 
